@@ -4,18 +4,22 @@ namespace App\Services\Calculate;
 
 use App\Services\Calculate\InteresSimple\CalculateInterestSimpleService;
 use App\Services\Calculate\InteresCompuesto\CalculateInterestCompoundService;
+use App\Services\Calculate\Anualidad\CalculateAnnuityService;
 
 class OrchestratorService
 {
     private $calculateInteresSimpleService;
     private $calculateInteresCompoundService;
+    private $calculateAnnuityService;
 
     public function __construct(
         CalculateInterestSimpleService $calculateInteresSimpleService,
-        CalculateInterestCompoundService $calculateInteresCompoundService
+        CalculateInterestCompoundService $calculateInteresCompoundService,
+        CalculateAnnuityService $calculateAnnuityService
     ) {
         $this->calculateInteresSimpleService = $calculateInteresSimpleService;
         $this->calculateInteresCompoundService = $calculateInteresCompoundService;
+        $this->calculateAnnuityService = $calculateAnnuityService;
     }
 
     public function calculate($request)
