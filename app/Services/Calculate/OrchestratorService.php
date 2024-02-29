@@ -3,8 +3,8 @@
 namespace App\Services\Calculate;
 
 use App\Services\Calculate\InteresSimple\CalculateInterestSimpleService;
-use App\Services\Calculate\InteresCompuesto\CalculateInterestCompoundService;
-use App\Services\Calculate\Anualidad\CalculateAnnuityService;
+use App\Services\Calculate\InteresCompound\CalculateInterestCompoundService;
+use App\Services\Calculate\Annuity\CalculateAnnuityService;
 
 class OrchestratorService
 {

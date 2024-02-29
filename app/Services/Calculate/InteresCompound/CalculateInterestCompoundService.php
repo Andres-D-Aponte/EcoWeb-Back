@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Services\Calculate\InteresCompuesto;
+namespace App\Services\Calculate\InteresCompound;
 
 
 class CalculateInterestCompoundService
