@@ -44,18 +44,24 @@ class CalculateInterestCompoundService
         return $compoundAmount;
     }
 
-    public function calculateTime($request) {   //ACTUALIZAR
+    public function calculateTime($request)
+    {
         $capital = $request->capital;
-        $interestEarned = $request->interestEarned;
+        $compoundAmount = $request->compoundAmount;
         $interestRate = $request->interestRate / 100;
-        $time = ($interestEarned / ($capital * $interestRate));
-        $time = $time * 360;
+        $showTime = $request->showTime;
 
-        $years = floor($time / 360);
-        $remainingDays = $time % 360;
-        $months = floor($remainingDays / 30);
-        $days = round($remainingDays % 30);
+        $time = (log($compoundAmount) - log($capital)) / log(1 + $interestRate);
 
-        return ['years' => $years, 'months' => $months, 'days' => $days, 'time' => ($time/360)];
+        switch ($showTime) {
+            case "years":
+                return $time;
+            case "months":
+                return $time * 12;
+            case "days":
+                return $time * 365;
+            default:
+                return 0;
+        }
     }
 }

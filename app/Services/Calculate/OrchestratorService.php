@@ -30,6 +30,10 @@ class OrchestratorService
                 return $this->resolve($this->calculateInteresCompoundService->calculate($request));
                 break;
             
+            case 'ANUALIDAD':
+                return $this->resolve($this->calculateAnnuityService->calculate($request));
+                break;
+            
             default:
                 # code...
                 break;
