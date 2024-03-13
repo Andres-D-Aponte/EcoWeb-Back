@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Services\Calculate\Anualidad;
+namespace App\Services\Calculate\Annuity;
 
 
 class CalculateAnnuityService
