@@ -4,18 +4,22 @@ namespace App\Services\Calculate;
 
 use App\Services\Calculate\InteresSimple\CalculateInterestSimpleService;
 use App\Services\Calculate\InteresCompuesto\CalculateInterestCompoundService;
+use App\Services\Calculate\TasaInteres\CalculateInterestRateService;
 
 class OrchestratorService
 {
     private $calculateInteresSimpleService;
     private $calculateInteresCompoundService;
+    private $calculateInteresRateService;
 
     public function __construct(
         CalculateInterestSimpleService $calculateInteresSimpleService,
-        CalculateInterestCompoundService $calculateInteresCompoundService
+        CalculateInterestCompoundService $calculateInteresCompoundService,
+        CalculateInterestRateService $calculateInteresRateService
     ) {
         $this->calculateInteresSimpleService = $calculateInteresSimpleService;
         $this->calculateInteresCompoundService = $calculateInteresCompoundService;
+        $this->calculateInteresRateService = $calculateInteresRateService;
     }
 
     public function calculate($request)
@@ -28,6 +32,10 @@ class OrchestratorService
 
             case 'COMPUESTO':
                 return $this->resolve($this->calculateInteresCompoundService->calculate($request));
+                break;
+            
+            case 'TASA INTERES':
+                return $this->resolve($this->calculateInterestRateService->calculate($request));
                 break;
             
             case 'ANUALIDAD':

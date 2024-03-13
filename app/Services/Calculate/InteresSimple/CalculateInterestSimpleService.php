@@ -36,7 +36,7 @@ class CalculateInterestSimpleService
     	$time = $request->time;
         $capital = $request->capital;
         $interestEarned = $request->interestEarned;
-        $interestRate = ($interestEarned / ($capital * ($time/12)))*100;
+        $interestRate = ($interestEarned / ($capital * ($time)))*100;
         return $interestRate . '%';
     }
 

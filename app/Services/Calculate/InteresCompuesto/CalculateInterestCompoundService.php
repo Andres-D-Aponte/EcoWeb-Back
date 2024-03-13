@@ -59,9 +59,22 @@ class CalculateInterestCompoundService
             case "months":
                 return $time * 12;
             case "days":
-                return $time * 365;
+                return $time * 360;
+            case "semester":
+                return $time * 2;
+            case "quarter":
+                return $time * 3;
+            case "trimester":
+                return $time * 4;
+            case "bimester":
+                return $time * 6;
+            case "fortnight":
+                return $time * 24;
+            case "week":
+                return $time * 52;
             default:
                 return 0;
         }
+        
     }
 }
