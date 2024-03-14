@@ -12,9 +12,9 @@ class CalculateAnnuityService
     }
 
     public function calculateFutureValue($request) {
-    	$periods = $request->periods;   //n_cuotas
-        $annuity = $request->annuity;   //pago que das por cada periodo
-        $interestRate = $request->interestRate / 100;   //tasa de interes en %
+    	$periods = $request->periods;
+        $annuity = $request->annuity;
+        $interestRate = $request->interestRate / 100;
 
         $factor = pow(1 + $interestRate, $periods);
 

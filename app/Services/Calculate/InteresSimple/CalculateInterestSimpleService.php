@@ -7,11 +7,11 @@ class CalculateInterestSimpleService
 {
     function calculate($request){
         $data = (object)$request->all();
-        if($data->type_calculate == "VALOR FUTURO") return $this->calculateFutureValue($request);
         if($data->type_calculate == "CAPITAL") return $this->calculateCapital($request);
-        if($data->type_calculate == "INTERES PRODUCIDO") return $this->calculateInterestEarned($request);
+        if($data->type_calculate == "VALOR FUTURO") return $this->calculateFutureValue($request);
         if($data->type_calculate == "TASA DE INTERES") return $this->calculateInterestRate($request);
         if($data->type_calculate == "TIEMPO INVERTIDO") return $this->calculateTime($request);
+        if($data->type_calculate == "INTERES PRODUCIDO") return $this->calculateInterestEarned($request);
     }
 
     public function calculateCapital($request) {
@@ -20,14 +20,6 @@ class CalculateInterestSimpleService
         $interestRate = $request->interestRate / 100;
         $capital = ($interestEarned / ($interestRate * $time));
         return $capital;
-    }
-
-    public function calculateInterestEarned($request){
-        $time = $request->time;
-        $interestRate = $request->interestRate / 100;
-        $capital = $request->capital;
-        $interestEarned = ($capital * $interestRate * $time);
-        return $interestEarned;
     }
 
     public function calculateFutureValue($request){
@@ -44,7 +36,7 @@ class CalculateInterestSimpleService
     	$time = $request->time;
         $capital = $request->capital;
         $interestEarned = $request->interestEarned;
-        $interestRate = ($interestEarned / ($capital * ($time/12)))*100;
+        $interestRate = ($interestEarned / ($capital * ($time)))*100;
         return $interestRate . '%';
     }
 
@@ -62,4 +54,13 @@ class CalculateInterestSimpleService
 
         return ['years' => $years, 'months' => $months, 'days' => $days, 'time' => ($time/360)];
     }
+
+    public function calculateInterestEarned($request){
+        $time = $request->time;
+        $interestRate = $request->interestRate / 100;
+        $capital = $request->capital;
+        $interestEarned = ($capital * $interestRate * $time);
+        return $interestEarned;
+    }
+
 }
