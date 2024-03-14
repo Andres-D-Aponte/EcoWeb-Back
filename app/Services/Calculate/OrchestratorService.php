@@ -12,10 +12,26 @@ class OrchestratorService
         $this->calculateInteresSimpleService = $calculateInteresSimpleService;
     }
 
-    function calculate($request){
-        $data = (object)$request->all();
-        if($data->type_interest == "SIMPLE")
-            return $this->resolve($this->calculateInteresSimpleService->calculate($request));
+    public function calculate($request)
+    {
+        $data = (object) $request->all();
+        switch ($data->type_interest) {
+            case 'SIMPLE':
+                return $this->resolve($this->calculateInteresSimpleService->calculate($request));
+                break;
+
+            case 'COMPUESTO':
+                return $this->resolve($this->calculateInteresCompoundService->calculate($request));
+                break;
+            
+            case 'ANUALIDAD':
+                return $this->resolve($this->calculateAnnuityService->calculate($request));
+                break;
+            
+            default:
+                # code...
+                break;
+        }
     }
 
     function resolve($data){
