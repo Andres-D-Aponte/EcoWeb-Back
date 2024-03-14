@@ -38,7 +38,7 @@ class OrchestratorService
                 return $this->resolve($this->calculateInteresCompoundService->calculate($request));
                 break;
             
-            case 'TASA INTERES':
+            case 'TASA DE INTERES':
                 return $this->resolve($this->calculateInterestRateService->calculate($request));
                 break;
             

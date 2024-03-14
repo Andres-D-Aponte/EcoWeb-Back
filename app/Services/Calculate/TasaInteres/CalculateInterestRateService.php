@@ -12,11 +12,12 @@ class CalculateInterestRateService
     }
 
     public function calculateInterestRateSimple($request) {
-    	$time = $request->time;
+        $time = $request->time;
         $capital = $request->capital;
         $interestEarned = $request->interestEarned;
         $interestRate = ($interestEarned / ($capital * ($time)))*100;
         return $interestRate . '%';
+    	
     }
 
     public function calculateInterestRateCompound($request) {
@@ -26,6 +27,8 @@ class CalculateInterestRateService
         $factor = pow($compoundAmount / $capital, 1 / $time) - 1;
 
         $interestRate = $factor * 100;
+
+        $interestRate = number_format($interestRate, 1);
 
         return $interestRate . '%';
     }

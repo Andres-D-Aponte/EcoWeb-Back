@@ -19,6 +19,7 @@ class CalculateInterestCompoundService
         $interestRate = $request->interestRate / 100;
         $factor = pow(1 + $interestRate, $time);
         $capital = ($compoundAmount / $factor);
+        $capital = number_format($capital, 2);
         return $capital;
     }
 
@@ -29,6 +30,8 @@ class CalculateInterestCompoundService
         $factor = pow($compoundAmount / $capital, 1 / $time) - 1;
 
         $interestRate = $factor * 100;
+
+        $interestRate = number_format($interestRate, 1);
 
         return $interestRate . '%';
     }
@@ -44,8 +47,7 @@ class CalculateInterestCompoundService
         return $compoundAmount;
     }
 
-    public function calculateTime($request)
-    {
+    public function calculateTime($request){
         $capital = $request->capital;
         $compoundAmount = $request->compoundAmount;
         $interestRate = $request->interestRate / 100;
@@ -54,27 +56,27 @@ class CalculateInterestCompoundService
         $time = (log($compoundAmount) - log($capital)) / log(1 + $interestRate);
 
         switch ($showTime) {
-            case "years":
-                return $time;
-            case "months":
-                return $time * 12;
-            case "days":
-                return $time * 360;
-            case "semester":
-                return $time * 2;
-            case "quarter":
-                return $time * 3;
-            case "trimester":
-                return $time * 4;
-            case "bimester":
-                return $time * 6;
-            case "fortnight":
-                return $time * 24;
-            case "week":
-                return $time * 52;
+            case "AÑOS":
+                return number_format($time, 2) . " AÑOS";
+            case "MESES":
+                return number_format($time * 12, 2) . " MESES";
+            case "DIAS":
+                return number_format($time * 360, 2) . " DIAS";
+            case "SEMESTRE":
+                return number_format($time * 2, 2) . " SEMESTRE";
+            case "CUATRIMESTRE":
+                return number_format($time * 3, 2) . " CUATRIMESTRE";
+            case "TRIMESTRE":
+                return number_format($time * 4, 2) . " TRIMESTRE";
+            case "BIMESTRE":
+                return number_format($time * 6, 2) . " BIMESTRE";
+            case "QUINCENA":
+                return number_format($time * 24, 2) . " QUINCENA";
+            case "SEMANA":
+                return number_format($time * 52, 2) . " SEMANA";
             default:
-                return 0;
+                return number_format($time, 2);
         }
-        
     }
+
 }

@@ -19,6 +19,7 @@ class CalculateInterestSimpleService
         $interestEarned = $request->interestEarned;
         $interestRate = $request->interestRate / 100;
         $capital = ($interestEarned / ($interestRate * $time));
+        $capital = number_format($capital, 2);
         return $capital;
     }
 
@@ -52,7 +53,8 @@ class CalculateInterestSimpleService
         $months = floor($remainingDays / 30);
         $days = round($remainingDays % 30);
 
-        return ['years' => $years, 'months' => $months, 'days' => $days, 'time' => ($time/360)];
+        return $years . " Años " . $months . " Meses " . $days . " Dias";
+        //['years' => $years, 'months' => $months, 'days' => $days, 'time' => ($time/360)]
     }
 
     public function calculateInterestEarned($request){
@@ -60,6 +62,7 @@ class CalculateInterestSimpleService
         $interestRate = $request->interestRate / 100;
         $capital = $request->capital;
         $interestEarned = ($capital * $interestRate * $time);
+        $interestEarned = number_format($interestEarned, 2);
         return $interestEarned;
     }
 
