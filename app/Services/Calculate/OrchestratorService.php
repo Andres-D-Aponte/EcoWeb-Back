@@ -22,14 +22,34 @@ class OrchestratorService
     ) {
         $this->calculateInteresSimpleService = $calculateInteresSimpleService;
         $this->calculateInteresCompoundService = $calculateInteresCompoundService;
-        $this->calculateInteresRateService = $calculateInteresRateService;
+        $this->calculateInterestRateService = $calculateInteresRateService;
         $this->calculateAnnuityService = $calculateAnnuityService;
     }
 
-    function calculate($request){
-        $data = (object)$request->all();
-        if($data->type_interest == "SIMPLE")
-            return $this->resolve($this->calculateInteresSimpleService->calculate($request));
+    public function calculate($request)
+    {
+        $data = (object) $request->all();
+        switch ($data->type_interest) {
+            case 'INTERES SIMPLE':
+                return $this->resolve($this->calculateInteresSimpleService->calculate($request));
+                break;
+
+            case 'INTERES COMPUESTO':
+                return $this->resolve($this->calculateInteresCompoundService->calculate($request));
+                break;
+            
+            case 'TASA INTERES':
+                return $this->resolve($this->calculateInterestRateService->calculate($request));
+                break;
+            
+            case 'ANUALIDAD':
+                return $this->resolve($this->calculateAnnuityService->calculate($request));
+                break;
+            
+            default:
+                # code...
+                break;
+        }
     }
 
     public function resolve($data)
@@ -39,4 +59,3 @@ class OrchestratorService
         ];
     }
 }
-

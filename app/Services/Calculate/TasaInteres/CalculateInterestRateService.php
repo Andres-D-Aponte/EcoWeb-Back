@@ -3,7 +3,7 @@
 namespace App\Services\Calculate\TasaInteres;
 
 
-class CalculateInterestSimpleService
+class CalculateInterestRateService
 {
     function calculate($request){
         $data = (object)$request->all();
