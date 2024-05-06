@@ -7,6 +7,9 @@ class CalculateInternalRateReturnService
 {
     function calculate($request){
         $data = (object)$request->all();
+        if(intval($data->num_tir) <= "0"){
+            return 'Flujos debe ser mayor que 0';
+        }
         if($data->type_calculate == "TIR") return $this->calculateTIR($request->flujos);
     }
 

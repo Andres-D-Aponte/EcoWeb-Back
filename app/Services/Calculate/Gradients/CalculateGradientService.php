@@ -40,6 +40,7 @@ class CalculateGradientService
         $n = intval($data->num_gradients); // Número de períodos
         $g = $data->incremento / 100; // Tasa de crecimiento por período (para gradientes geométricos)
  
+        if(($i - $g) == 0) return 'Error %Interes ≠ %Crecimiento';
         //$vp = ($P * (pow(1 + $i, $n)) - (pow(1 + $g, $n))) / ($i - $r);
         $vf = $P * ((pow(1 + $i, $n) - pow(1 + $g, $n)) / ($i - $g));
         return  number_format($vf,2);
